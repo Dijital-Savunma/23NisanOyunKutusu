@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>🛡️ Dijital Savunma Kahramanı</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- ANA MENÜ -->
+    <div id="main-menu" class="screen active">
+        <div class="menu-container">
+            <div class="logo-area">
+                <div class="shield-icon">🛡️</div>
+                <h1>Dijital Savunma<br>Kahramanı</h1>
+                <p class="subtitle">İYTE - 23 Nisan Çocuk Şenliği</p>
+            </div>
+
+            <div class="age-selection">
+                <h2>Yaşını Seç!</h2>
+                <div class="age-buttons">
+                    <button class="age-btn age-4-5" onclick="startGame('4-5')">
+                        <span class="age-emoji">🧸</span>
+                        <span class="age-label">4-5 Yaş</span>
+                        <span class="age-desc">Minikler</span>
+                    </button>
+                    <button class="age-btn age-6-8" onclick="startGame('6-8')">
+                        <span class="age-emoji">🚀</span>
+                        <span class="age-label">6-8 Yaş</span>
+                        <span class="age-desc">Kaşifler</span>
+                    </button>
+                    <button class="age-btn age-9-12" onclick="startGame('9-12')">
+                        <span class="age-emoji">⚡</span>
+                        <span class="age-label">9-12 Yaş</span>
+                        <span class="age-desc">Uzmanlar</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="footer-info">
+                <p>dijitalsavunma.org</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- OYUN SEÇİM EKRANI -->
+    <div id="game-picker" class="screen">
+        <div class="picker-container">
+            <h2>Hangi Oyunu Oynamak İstersin?</h2>
+            <div class="game-cards" id="game-cards">
+                <!-- Dinamik olarak doldurulacak -->
+            </div>
+        </div>
+    </div>
+
+    <!-- KAHRAMAN OLUŞTURMA / FOTOĞRAF ÇEKİM EKRANI -->
+    <div id="avatar-screen" class="screen">
+        <div class="avatar-container">
+            <h2>Kahramanını Oluştur!</h2>
+            <p class="avatar-subtitle">Yarattığın kahramanın fotoğrafını çek ya da kendi fotoğrafını kullan!</p>
+
+            <!-- Kamera önizleme -->
+            <div class="camera-area">
+                <video id="camera-video" autoplay playsinline></video>
+                <canvas id="camera-snapshot" width="200" height="200"></canvas>
+                <div class="avatar-preview" id="avatar-preview">
+                    <span class="avatar-placeholder">📷</span>
+                </div>
+            </div>
+
+            <div class="avatar-buttons">
+                <button class="btn-camera" id="btn-open-camera" onclick="openCamera()">
+                    📷 Kamerayı Aç
+                </button>
+                <button class="btn-camera btn-capture" id="btn-capture" onclick="capturePhoto()" style="display:none;">
+                    📸 Fotoğraf Çek!
+                </button>
+                <button class="btn-camera btn-retake" id="btn-retake" onclick="retakePhoto()" style="display:none;">
+                    🔄 Tekrar Çek
+                </button>
+            </div>
+
+            <div class="avatar-divider">
+                <span>veya</span>
+            </div>
+
+            <div class="avatar-upload">
+                <label class="btn-upload" for="file-upload">
+                    📁 Galeriden Seç
+                </label>
+                <input type="file" id="file-upload" accept="image/*" onchange="uploadPhoto(event)" hidden>
+            </div>
+
+            <div class="avatar-divider">
+                <span>ya da bir kahraman seç</span>
+            </div>
+
+            <div class="default-avatars" id="default-avatars">
+                <button class="default-avatar-btn" onclick="pickDefaultAvatar('🦁', '#fbbf24')">🦁</button>
+                <button class="default-avatar-btn" onclick="pickDefaultAvatar('🐱', '#f472b6')">🐱</button>
+                <button class="default-avatar-btn" onclick="pickDefaultAvatar('🦊', '#f97316')">🦊</button>
+                <button class="default-avatar-btn" onclick="pickDefaultAvatar('🐼', '#a0a0d0')">🐼</button>
+                <button class="default-avatar-btn" onclick="pickDefaultAvatar('🦄', '#c084fc')">🦄</button>
+                <button class="default-avatar-btn" onclick="pickDefaultAvatar('🐸', '#4ade80')">🐸</button>
+                <button class="default-avatar-btn" onclick="pickDefaultAvatar('🐰', '#fca5a5')">🐰</button>
+                <button class="default-avatar-btn" onclick="pickDefaultAvatar('🐶', '#a78bfa')">🐶</button>
+            </div>
+
+            <button class="btn-start" id="btn-avatar-next" onclick="avatarDone()" style="display:none;">
+                Devam Et →
+            </button>
+        </div>
+    </div>
+
+    <!-- EBEVEYN ŞİFRE KURULUM EKRANI -->
+    <div id="parent-setup" class="screen">
+        <div class="setup-container">
+            <div class="setup-header">
+                <h2>👨‍👩‍👧 Ebeveyn Kurulumu</h2>
+                <p>Oyun sırasında çocuğunuz dijital izin ekranlarıyla karşılaşacak.<br>
+                Aşağıdaki <strong>4 haneli şifreyi</strong> not alın veya aklınızda tutun.</p>
+            </div>
+            <div class="password-display">
+                <div class="password-box" id="parent-password">----</div>
+                <button class="btn-refresh" onclick="generatePassword()">🔄 Yeni Şifre</button>
+            </div>
+            <div class="setup-info">
+                <div class="info-card">
+                    <span class="info-icon">🎯</span>
+                    <p>Çocuğunuz "Kabul Et" derse bu şifreyi girmeniz gerekecek. Birlikte karar verin!</p>
+                </div>
+                <div class="info-card">
+                    <span class="info-icon">🌟</span>
+                    <p>"Reddet" seçeneği her zaman doğru cevaptır ve ödüllendirilir!</p>
+                </div>
+            </div>
+            <button class="btn-start" onclick="confirmParentSetup()">Oyuna Başla! 🎮</button>
+        </div>
+    </div>
+
+    <!-- OYUN EKRANI -->
+    <div id="game-screen" class="screen">
+        <canvas id="game-canvas"></canvas>
+        <div id="game-hud">
+            <div class="hud-left">
+                <span id="hud-score">⭐ 0</span>
+            </div>
+            <div class="hud-center">
+                <span id="hud-level">Bölüm 1</span>
+            </div>
+            <div class="hud-right">
+                <span id="hud-hearts">❤️❤️❤️</span>
+            </div>
+        </div>
+        <!-- Mobil kontroller -->
+        <div id="mobile-controls">
+            <button class="ctrl-btn ctrl-left" id="btn-left">◀</button>
+            <button class="ctrl-btn ctrl-right" id="btn-right">▶</button>
+            <button class="ctrl-btn ctrl-jump" id="btn-jump">▲</button>
+        </div>
+    </div>
+
+    <!-- İZİN POPUP -->
+    <div id="permission-popup" class="screen">
+        <div class="popup-container">
+            <div class="popup-icon" id="popup-icon">📷</div>
+            <h2 id="popup-title">Kamera İzni</h2>
+            <p id="popup-message">Aynada kendini görmek için kameranı aç!</p>
+            <div class="popup-buttons">
+                <button class="btn-accept" onclick="handlePermission(true)">✅ Kabul Et</button>
+                <button class="btn-reject" onclick="handlePermission(false)">🚫 Reddet</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ŞİFRE GİRİŞ EKRANI -->
+    <div id="password-screen" class="screen">
+        <div class="password-container">
+            <h2>🔐 Ebeveyn Onayı Gerekli</h2>
+            <p>Bu izni vermek için anne veya babanın şifresini gir!</p>
+            <div class="pin-input">
+                <input type="number" id="pin-1" maxlength="1" oninput="pinNext(1)">
+                <input type="number" id="pin-2" maxlength="1" oninput="pinNext(2)">
+                <input type="number" id="pin-3" maxlength="1" oninput="pinNext(3)">
+                <input type="number" id="pin-4" maxlength="1" oninput="pinNext(4)">
+            </div>
+            <button class="btn-check" onclick="checkPassword()">Kontrol Et</button>
+            <button class="btn-back-game" onclick="backToGame()">← Vazgeç</button>
+        </div>
+    </div>
+
+    <!-- SONUÇ / GERİ BİLDİRİM EKRANI -->
+    <div id="feedback-screen" class="screen">
+        <div class="feedback-container">
+            <div class="feedback-icon" id="feedback-icon">🎉</div>
+            <h2 id="feedback-title">Harika!</h2>
+            <p id="feedback-message">Mesaj</p>
+            <button class="btn-continue" onclick="continuePlaying()">Devam Et →</button>
+        </div>
+        <canvas id="confetti-canvas"></canvas>
+    </div>
+
+    <!-- FİNAL EKRANI — Sekmeli -->
+    <div id="final-screen" class="screen">
+        <div class="final-wrapper">
+            <!-- Sekme butonları -->
+            <div class="final-tabs">
+                <button class="tab-btn active" onclick="switchFinalTab('cert')">🛡️ Sertifika</button>
+                <button class="tab-btn" onclick="switchFinalTab('parent')">📊 Ebeveyn</button>
+                <button class="tab-btn" onclick="switchFinalTab('guide')">📖 Rehber</button>
+            </div>
+
+            <!-- SEKME 1: SERTİFİKA -->
+            <div class="final-tab-content active" id="tab-cert">
+                <div class="certificate-container">
+                    <div class="certificate" id="certificate-capture">
+                        <div class="cert-border">
+                            <div class="cert-header">
+                                <div class="cert-avatar" id="cert-avatar">
+                                    <span class="cert-badge">🛡️</span>
+                                </div>
+                                <h1>Dijital Savunma Uzmanı</h1>
+                                <h2>Sertifikası</h2>
+                            </div>
+                            <div class="cert-body">
+                                <p>Bu sertifika</p>
+                                <div class="cert-name" id="cert-player-name">Dijital Kahraman</div>
+                                <p>adlı kahramana, dijital dünyada haklarını koruma<br>becerisini başarıyla gösterdiği için verilmiştir.</p>
+                            </div>
+                            <div class="cert-footer">
+                                <div class="cert-stats" id="cert-stats"></div>
+                                <p class="cert-date" id="cert-date"></p>
+                                <p class="cert-org">İYTE - 23 Nisan Çocuk Şenliği</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-download" onclick="downloadCertificate()">📥 Sertifikayı İndir</button>
+                </div>
+            </div>
+
+            <!-- SEKME 2: EBEVEYN BROŞÜRÜ -->
+            <div class="final-tab-content" id="tab-parent">
+                <div class="brochure-container">
+                    <div class="brochure-header">
+                        <h2>📊 Dijital Dünyada Çocuklar</h2>
+                        <p>Bilmeniz gereken rakamlar</p>
+                    </div>
+
+                    <div class="stat-cards">
+                        <div class="stat-card stat-red">
+                            <div class="stat-number">1/3</div>
+                            <div class="stat-text">İnternet kullanıcılarının <strong>3'te 1'i çocuk</strong>. Çoğu korumasız.</div>
+                            <div class="stat-source">UNICEF, 2024</div>
+                        </div>
+                        <div class="stat-card stat-orange">
+                            <div class="stat-number">%72</div>
+                            <div class="stat-text">Çocuk uygulamalarının <strong>%72'si</strong> kişisel veri topluyor.</div>
+                            <div class="stat-source">COPPA Araştırması</div>
+                        </div>
+                        <div class="stat-card stat-purple">
+                            <div class="stat-number">%45</div>
+                            <div class="stat-text">Çocukların <strong>%45'i</strong> siber zorbalığa maruz kalıyor.</div>
+                            <div class="stat-source">WHO, 2023</div>
+                        </div>
+                        <div class="stat-card stat-blue">
+                            <div class="stat-number">8 yaş</div>
+                            <div class="stat-text">Çocukların ilk akıllı telefona sahip olma <strong>ortalama yaşı</strong>.</div>
+                            <div class="stat-source">Common Sense Media</div>
+                        </div>
+                        <div class="stat-card stat-green">
+                            <div class="stat-number">%80</div>
+                            <div class="stat-text">Ebeveynlerin <strong>%80'i</strong> çocuklarının hangi uygulamaları kullandığını bilmiyor.</div>
+                            <div class="stat-source">Kaspersky, 2024</div>
+                        </div>
+                        <div class="stat-card stat-pink">
+                            <div class="stat-number">5 dk</div>
+                            <div class="stat-text">Bir çocuğun kişisel bilgilerini paylaşması için ortalama <strong>5 dakika</strong> yeterli.</div>
+                            <div class="stat-source">Internet Watch Foundation</div>
+                        </div>
+                    </div>
+
+                    <div class="brochure-tips">
+                        <h3>🔐 Hemen Yapabileceğiniz 5 Adım</h3>
+                        <div class="tip-list">
+                            <div class="tip-item">
+                                <span class="tip-num">1</span>
+                                <span>Cihazlardaki <strong>uygulama izinlerini</strong> birlikte kontrol edin.</span>
+                            </div>
+                            <div class="tip-item">
+                                <span class="tip-num">2</span>
+                                <span><strong>Ebeveyn kontrol</strong> yazılımlarını aktif edin.</span>
+                            </div>
+                            <div class="tip-item">
+                                <span class="tip-num">3</span>
+                                <span>Çocuğunuzla <strong>açık iletişim</strong> kurun — cezalandırmak yerine dinleyin.</span>
+                            </div>
+                            <div class="tip-item">
+                                <span class="tip-num">4</span>
+                                <span><strong>Ekran süresini</strong> birlikte belirleyin ve uygulayın.</span>
+                            </div>
+                            <div class="tip-item">
+                                <span class="tip-num">5</span>
+                                <span>Her yeni uygulama yüklemesini <strong>birlikte karar vererek</strong> yapın.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="brochure-result" id="brochure-result">
+                        <!-- Oyun sonuçları buraya dinamik eklenir -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEKME 3: REHBER & QR -->
+            <div class="final-tab-content" id="tab-guide">
+                <div class="guide-container">
+                    <div class="guide-header">
+                        <h2>📖 Dijital Savunma Rehberi</h2>
+                        <p>Kapsamlı rehberimizi indirmek için QR kodu okutun</p>
+                    </div>
+
+                    <div class="qr-area">
+                        <canvas id="qr-canvas" width="200" height="200"></canvas>
+                        <p class="qr-url">dijitalsavunma.org/rehber</p>
+                    </div>
+
+                    <div class="guide-contents">
+                        <h3>Rehberde Neler Var?</h3>
+                        <div class="guide-item">
+                            <span class="guide-icon">📈</span>
+                            <div>
+                                <strong>Dünya İstatistikleri</strong>
+                                <p>Çocukların dijital risklere maruz kalma oranları</p>
+                            </div>
+                        </div>
+                        <div class="guide-item">
+                            <span class="guide-icon">🌍</span>
+                            <div>
+                                <strong>Dünyadan Örnekler</strong>
+                                <p>Farklı ülkelerdeki dijital güvenlik uygulamaları</p>
+                            </div>
+                        </div>
+                        <div class="guide-item">
+                            <span class="guide-icon">🛡️</span>
+                            <div>
+                                <strong>Alınması Gereken Önlemler</strong>
+                                <p>Yaşa göre adım adım güvenlik rehberi</p>
+                            </div>
+                        </div>
+                        <div class="guide-item">
+                            <span class="guide-icon">📱</span>
+                            <div>
+                                <strong>Uygulama Kontrol Listesi</strong>
+                                <p>Hangi izinler tehlikeli, hangisi güvenli?</p>
+                            </div>
+                        </div>
+                        <div class="guide-item">
+                            <span class="guide-icon">💬</span>
+                            <div>
+                                <strong>Konuşma Rehberi</strong>
+                                <p>Çocuğunuzla dijital güvenlik hakkında nasıl konuşursunuz?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alt butonlar -->
+            <div class="final-buttons">
+                <button class="btn-retry" onclick="location.reload()">🔄 Tekrar Oyna</button>
+                <button class="btn-home" onclick="goHome()">🏠 Ana Menü</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/platform-motoru.js"></script>
+    <script src="js/bardak-oyunu.js"></script>
+    <script src="js/fark-bul-oyunu.js"></script>
+    <script src="js/araba-oyunu.js"></script>
+    <script src="js/guvenlik-duvari-oyunu.js"></script>
+    <script src="js/sifre-kirici-oyunu.js"></script>
+    <script src="js/seviyeler.js"></script>
+    <script src="js/izin-sistemi.js"></script>
+    <script src="js/ana-kontrol.js"></script>
+</body>
+</html>
