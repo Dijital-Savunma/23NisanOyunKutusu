@@ -11,8 +11,8 @@
 
 body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: #0a0a2e;
-    color: #fff;
+    background: #060609;
+    color: #ede9e0;
     overflow: hidden;
     width: 100vw;
     height: 100vh;
@@ -37,7 +37,7 @@ body {
    ANA MENÜ
    ============================================ */
 #main-menu {
-    background: linear-gradient(135deg, #0a0a2e 0%, #1a1a4e 50%, #2d1b69 100%);
+    background: linear-gradient(135deg, #060609 0%, #0c0c12 50%, #13131c 100%);
 }
 
 .menu-container {
@@ -54,7 +54,7 @@ body {
 .shield-icon {
     font-size: 80px;
     animation: float 3s ease-in-out infinite;
-    filter: drop-shadow(0 0 20px rgba(100, 200, 255, 0.5));
+    filter: drop-shadow(0 0 20px rgba(217, 0, 0, 0.5));
 }
 
 @keyframes float {
@@ -64,7 +64,7 @@ body {
 
 .logo-area h1 {
     font-size: 2.2em;
-    background: linear-gradient(to right, #64c8ff, #a78bfa, #f472b6);
+    background: linear-gradient(to right, #ff1a1a, #d90000);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -74,14 +74,14 @@ body {
 
 .subtitle {
     font-size: 1em;
-    color: #a0a0d0;
+    color: #7a7870;
     margin-top: 8px;
 }
 
 .age-selection h2 {
     font-size: 1.4em;
     margin-bottom: 20px;
-    color: #e0e0ff;
+    color: #ede9e0;
 }
 
 .age-buttons {
@@ -111,17 +111,17 @@ body {
     border-color: rgba(255,255,255,0.4);
 }
 
-.age-4-5:hover, .age-4-5:active { background: rgba(251, 191, 36, 0.2); border-color: #fbbf24; }
-.age-6-8:hover, .age-6-8:active { background: rgba(59, 130, 246, 0.2); border-color: #3b82f6; }
-.age-9-12:hover, .age-9-12:active { background: rgba(139, 92, 246, 0.2); border-color: #8b5cf6; }
+.age-4-5:hover, .age-4-5:active { background: rgba(217, 0, 0, 0.12); border-color: #ff1a1a; }
+.age-6-8:hover, .age-6-8:active { background: rgba(217, 0, 0, 0.12); border-color: #d90000; }
+.age-9-12:hover, .age-9-12:active { background: rgba(217, 0, 0, 0.12); border-color: #b00000; }
 
 .age-emoji { font-size: 2.5em; }
 .age-label { font-size: 1.3em; font-weight: 700; }
-.age-desc { font-size: 0.85em; color: #a0a0d0; }
+.age-desc { font-size: 0.85em; color: #7a7870; }
 
 .footer-info {
     margin-top: 30px;
-    color: #606090;
+    color: #3d3c3a;
     font-size: 0.85em;
 }
 
@@ -129,7 +129,7 @@ body {
    OYUN SEÇİM EKRANI (4-5 YAŞ)
    ============================================ */
 #game-picker {
-    background: linear-gradient(135deg, #0a0a2e 0%, #1a1a4e 50%, #2d1b69 100%);
+    background: linear-gradient(135deg, #060609 0%, #0c0c12 50%, #13131c 100%);
 }
 
 .picker-container {
@@ -142,7 +142,7 @@ body {
 .picker-container h2 {
     font-size: 1.6em;
     margin-bottom: 25px;
-    color: #e0e0ff;
+    color: #ede9e0;
 }
 
 .game-cards {
@@ -169,7 +169,7 @@ body {
 
 .game-card:hover, .game-card:active {
     transform: scale(1.06);
-    border-color: #fbbf24;
+    border-color: #d90000;
     background: rgba(251, 191, 36, 0.1);
 }
 
@@ -184,14 +184,14 @@ body {
 
 .game-card-desc {
     font-size: 0.9em;
-    color: #a0a0d0;
+    color: #7a7870;
 }
 
 /* ============================================
    KAHRAMAN / AVATAR EKRANI
    ============================================ */
 #avatar-screen {
-    background: linear-gradient(135deg, #0a0a2e 0%, #1a1a4e 50%, #2d1b69 100%);
+    background: linear-gradient(135deg, #060609 0%, #0c0c12 50%, #13131c 100%);
 }
 
 .avatar-container {
@@ -204,14 +204,14 @@ body {
 .avatar-container h2 {
     font-size: 1.8em;
     margin-bottom: 8px;
-    background: linear-gradient(to right, #fbbf24, #f472b6);
+    background: linear-gradient(to right, #ff1a1a, #d90000);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
 .avatar-subtitle {
-    color: #b0b0d0;
+    color: #7a7870;
     margin-bottom: 20px;
     font-size: 1em;
 }
@@ -271,7 +271,7 @@ body {
 }
 
 .btn-camera {
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    background: linear-gradient(135deg, #d90000, #ff1a1a);
     border: none;
     border-radius: 50px;
     padding: 12px 25px;
@@ -287,11 +287,11 @@ body {
 }
 
 .btn-capture {
-    background: linear-gradient(135deg, #10b981, #3b82f6);
+    background: linear-gradient(135deg, #d90000, #b00000);
 }
 
 .btn-retake {
-    background: linear-gradient(135deg, #f59e0b, #ef4444);
+    background: linear-gradient(135deg, #ff1a1a, #d90000);
 }
 
 .avatar-divider {
@@ -310,7 +310,7 @@ body {
 }
 
 .avatar-divider span {
-    color: #808090;
+    color: #3d3c3a;
     font-size: 0.9em;
 }
 
@@ -337,7 +337,7 @@ body {
     margin: 15px auto 0;
     background: none;
     border: none;
-    color: #808090;
+    color: #3d3c3a;
     font-size: 0.9em;
     cursor: pointer;
     text-decoration: underline;
@@ -367,27 +367,27 @@ body {
 
 .default-avatar-btn:hover, .default-avatar-btn:active {
     transform: scale(1.15);
-    border-color: #fbbf24;
+    border-color: #d90000;
     background: rgba(255,255,255,0.12);
 }
 
 .default-avatar-btn.selected {
-    border-color: #10b981;
-    background: rgba(16, 185, 129, 0.2);
-    box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+    border-color: #d90000;
+    background: rgba(217, 0, 0, 0.15);
+    box-shadow: 0 0 15px rgba(217, 0, 0, 0.3);
     transform: scale(1.15);
 }
 
 .camera-area.has-photo {
-    border-color: #10b981;
-    box-shadow: 0 0 25px rgba(16, 185, 129, 0.3);
+    border-color: #d90000;
+    box-shadow: 0 0 25px rgba(217, 0, 0, 0.2);
 }
 
 /* ============================================
    EBEVEYN KURULUM
    ============================================ */
 #parent-setup {
-    background: linear-gradient(135deg, #1a1a3e 0%, #2d2b69 100%);
+    background: linear-gradient(135deg, #0c0c12 0%, #13131c 100%);
 }
 
 .setup-container {
@@ -403,7 +403,7 @@ body {
 }
 
 .setup-header p {
-    color: #b0b0d0;
+    color: #7a7870;
     line-height: 1.5;
     margin-bottom: 20px;
 }
@@ -421,7 +421,7 @@ body {
     border-radius: 15px;
     padding: 15px 30px;
     display: inline-block;
-    color: #64c8ff;
+    color: #ff1a1a;
     font-family: 'Courier New', monospace;
 }
 
@@ -430,7 +430,7 @@ body {
     margin: 10px auto;
     background: none;
     border: none;
-    color: #a0a0d0;
+    color: #7a7870;
     font-size: 1em;
     cursor: pointer;
     padding: 8px 15px;
@@ -457,13 +457,13 @@ body {
 
 .info-card p {
     font-size: 0.85em;
-    color: #b0b0d0;
+    color: #7a7870;
     margin-top: 8px;
     line-height: 1.4;
 }
 
 .btn-start {
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    background: linear-gradient(135deg, #d90000, #ff1a1a);
     border: none;
     border-radius: 50px;
     padding: 15px 50px;
@@ -554,7 +554,7 @@ body {
 }
 
 .popup-container {
-    background: linear-gradient(135deg, #1e1e4a, #2a2a5a);
+    background: linear-gradient(135deg, #0c0c12, #13131c);
     border: 2px solid rgba(255,255,255,0.15);
     border-radius: 25px;
     padding: 35px;
@@ -577,7 +577,7 @@ body {
 }
 
 .popup-container p {
-    color: #c0c0e0;
+    color: #7a7870;
     margin-bottom: 25px;
     font-size: 1.1em;
     line-height: 1.5;
@@ -603,11 +603,11 @@ body {
 }
 
 .btn-accept {
-    background: linear-gradient(135deg, #f59e0b, #ef4444);
+    background: linear-gradient(135deg, #ff1a1a, #d90000);
 }
 
 .btn-reject {
-    background: linear-gradient(135deg, #10b981, #3b82f6);
+    background: linear-gradient(135deg, #d90000, #b00000);
 }
 
 .btn-accept:hover, .btn-reject:hover {
@@ -623,7 +623,7 @@ body {
 }
 
 .password-container {
-    background: linear-gradient(135deg, #1e1e4a, #2a2a5a);
+    background: linear-gradient(135deg, #0c0c12, #13131c);
     border-radius: 25px;
     padding: 35px;
     text-align: center;
@@ -633,7 +633,7 @@ body {
 }
 
 .password-container h2 { margin-bottom: 10px; }
-.password-container p { color: #b0b0d0; margin-bottom: 20px; }
+.password-container p { color: #7a7870; margin-bottom: 20px; }
 
 .pin-input {
     display: flex;
@@ -656,12 +656,12 @@ body {
 }
 
 .pin-input input:focus {
-    border-color: #64c8ff;
-    box-shadow: 0 0 15px rgba(100, 200, 255, 0.3);
+    border-color: #ff1a1a;
+    box-shadow: 0 0 15px rgba(217, 0, 0, 0.3);
 }
 
 .btn-check {
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    background: linear-gradient(135deg, #d90000, #ff1a1a);
     border: none;
     border-radius: 50px;
     padding: 12px 40px;
@@ -677,7 +677,7 @@ body {
 .btn-back-game {
     background: none;
     border: none;
-    color: #a0a0d0;
+    color: #7a7870;
     font-size: 1em;
     cursor: pointer;
     padding: 10px;
@@ -708,14 +708,14 @@ body {
 
 .feedback-container p {
     font-size: 1.2em;
-    color: #c0c0e0;
+    color: #7a7870;
     margin-bottom: 25px;
     max-width: 400px;
     line-height: 1.5;
 }
 
 .btn-continue {
-    background: linear-gradient(135deg, #10b981, #3b82f6);
+    background: linear-gradient(135deg, #d90000, #b00000);
     border: none;
     border-radius: 50px;
     padding: 14px 45px;
@@ -737,7 +737,7 @@ body {
    FİNAL EKRANI — SEKMELİ
    ============================================ */
 #final-screen {
-    background: linear-gradient(135deg, #0a0a2e, #1a1a4e);
+    background: linear-gradient(135deg, #060609, #0c0c12);
     overflow-y: auto;
     align-items: flex-start;
     padding-top: 10px;
@@ -758,7 +758,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 5;
-    background: #0a0a2e;
+    background: #060609;
     padding: 10px 0;
 }
 
@@ -769,14 +769,14 @@ body {
     padding: 10px 18px;
     font-size: 0.95em;
     font-weight: 600;
-    color: #a0a0d0;
+    color: #7a7870;
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .tab-btn.active {
-    background: rgba(100, 200, 255, 0.15);
-    border-color: #64c8ff;
+    background: rgba(217, 0, 0, 0.15);
+    border-color: #ff1a1a;
     color: #fff;
 }
 
@@ -798,7 +798,7 @@ body {
 
 .cert-border {
     border: 4px solid;
-    border-image: linear-gradient(135deg, #fbbf24, #f472b6, #8b5cf6, #3b82f6) 1;
+    border-image: linear-gradient(135deg, #d90000, #ff1a1a, #d90000, #b00000) 1;
     padding: 25px 20px;
     background: rgba(255,255,255,0.03);
     text-align: center;
@@ -809,7 +809,7 @@ body {
     margin: 0 auto 8px;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid #fbbf24;
+    border: 3px solid #d90000;
     display: flex; align-items: center; justify-content: center;
     background: rgba(255,255,255,0.05);
 }
@@ -818,15 +818,15 @@ body {
 
 .cert-header h1 {
     font-size: 1.6em;
-    background: linear-gradient(to right, #fbbf24, #f472b6);
+    background: linear-gradient(to right, #ff1a1a, #d90000);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
-.cert-header h2 { font-size: 1.1em; color: #a0a0d0; font-weight: 400; }
+.cert-header h2 { font-size: 1.1em; color: #7a7870; font-weight: 400; }
 .cert-body { margin: 20px 0; }
-.cert-body p { color: #c0c0e0; }
+.cert-body p { color: #7a7870; }
 
 .cert-name {
-    font-size: 1.8em; font-weight: 800; color: #64c8ff;
+    font-size: 1.8em; font-weight: 800; color: #ff1a1a;
     margin: 8px 0; padding: 8px;
     border-bottom: 2px solid rgba(255,255,255,0.1);
 }
@@ -840,13 +840,13 @@ body {
     background: rgba(255,255,255,0.06); border-radius: 10px;
     padding: 8px 12px; text-align: center;
 }
-.cert-stat .stat-value { font-size: 1.3em; font-weight: 800; color: #10b981; }
-.cert-stat .stat-label { font-size: 0.7em; color: #a0a0d0; }
-.cert-date { color: #808090; margin-top: 8px; font-size: 0.85em; }
-.cert-org { color: #a0a0d0; font-weight: 600; margin-top: 4px; font-size: 0.9em; }
+.cert-stat .stat-value { font-size: 1.3em; font-weight: 800; color: #d90000; }
+.cert-stat .stat-label { font-size: 0.7em; color: #7a7870; }
+.cert-date { color: #3d3c3a; margin-top: 8px; font-size: 0.85em; }
+.cert-org { color: #7a7870; font-weight: 600; margin-top: 4px; font-size: 0.9em; }
 
 .btn-download {
-    background: linear-gradient(135deg, #10b981, #059669);
+    background: linear-gradient(135deg, #d90000, #b00000);
     border: none; border-radius: 50px;
     padding: 12px 30px; font-size: 1.05em; font-weight: 700;
     color: #fff; cursor: pointer; margin-top: 5px;
@@ -862,7 +862,7 @@ body {
 .brochure-header h2 {
     font-size: 1.5em; margin-bottom: 5px;
 }
-.brochure-header p { color: #a0a0d0; margin-bottom: 18px; }
+.brochure-header p { color: #7a7870; margin-bottom: 18px; }
 
 .stat-cards {
     display: grid;
@@ -879,22 +879,22 @@ body {
     border-left: 4px solid;
 }
 
-.stat-red { border-color: #ef4444; }
-.stat-orange { border-color: #f97316; }
-.stat-purple { border-color: #8b5cf6; }
-.stat-blue { border-color: #3b82f6; }
-.stat-green { border-color: #10b981; }
-.stat-pink { border-color: #f472b6; }
+.stat-red { border-color: #d90000; }
+.stat-orange { border-color: #ff1a1a; }
+.stat-purple { border-color: #b00000; }
+.stat-blue { border-color: #d90000; }
+.stat-green { border-color: #ff1a1a; }
+.stat-pink { border-color: #b00000; }
 
 .stat-number {
     font-size: 1.8em; font-weight: 900;
-    background: linear-gradient(to right, #64c8ff, #a78bfa);
+    background: linear-gradient(to right, #ff1a1a, #d90000);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     line-height: 1.1;
 }
 
-.stat-text { font-size: 0.8em; color: #c0c0e0; margin-top: 4px; line-height: 1.3; }
-.stat-source { font-size: 0.65em; color: #606080; margin-top: 4px; font-style: italic; }
+.stat-text { font-size: 0.8em; color: #7a7870; margin-top: 4px; line-height: 1.3; }
+.stat-source { font-size: 0.65em; color: #3d3c3a; margin-top: 4px; font-style: italic; }
 
 .brochure-tips {
     background: rgba(255,255,255,0.04);
@@ -910,12 +910,12 @@ body {
 
 .tip-item {
     display: flex; align-items: flex-start; gap: 10px;
-    font-size: 0.88em; color: #c0c0e0; line-height: 1.4;
+    font-size: 0.88em; color: #7a7870; line-height: 1.4;
 }
 
 .tip-num {
     min-width: 26px; height: 26px;
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    background: linear-gradient(135deg, #d90000, #ff1a1a);
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     font-weight: 800; font-size: 0.85em; color: #fff;
@@ -923,20 +923,20 @@ body {
 }
 
 .brochure-result {
-    background: rgba(16, 185, 129, 0.08);
-    border: 1px solid rgba(16, 185, 129, 0.2);
+    background: rgba(217, 0, 0, 0.06);
+    border: 1px solid rgba(217, 0, 0, 0.15);
     border-radius: 14px;
     padding: 16px;
     text-align: center;
 }
 
-.brochure-result h3 { font-size: 1.1em; margin-bottom: 8px; color: #10b981; }
-.brochure-result p { font-size: 0.85em; color: #b0b0d0; line-height: 1.4; }
+.brochure-result h3 { font-size: 1.1em; margin-bottom: 8px; color: #d90000; }
+.brochure-result p { font-size: 0.85em; color: #7a7870; line-height: 1.4; }
 
 /* Rehber & QR */
 .guide-container { text-align: center; }
 .guide-header h2 { font-size: 1.5em; margin-bottom: 5px; }
-.guide-header p { color: #a0a0d0; margin-bottom: 18px; }
+.guide-header p { color: #7a7870; margin-bottom: 18px; }
 
 .qr-area {
     background: #fff;
@@ -988,7 +988,7 @@ body {
 
 .guide-item p {
     font-size: 0.8em;
-    color: #a0a0d0;
+    color: #7a7870;
     margin: 0;
     line-height: 1.3;
 }
@@ -998,7 +998,7 @@ body {
     display: flex; gap: 12px; justify-content: center;
     margin-top: 18px;
     position: sticky; bottom: 0;
-    background: linear-gradient(to top, #0a0a2e 60%, transparent);
+    background: linear-gradient(to top, #060609 60%, transparent);
     padding: 15px 0 10px;
 }
 
@@ -1006,12 +1006,18 @@ body {
     padding: 11px 25px; border: none; border-radius: 50px;
     font-size: 1em; font-weight: 700; cursor: pointer; color: #fff;
 }
-.btn-retry { background: linear-gradient(135deg, #3b82f6, #8b5cf6); }
+.btn-retry { background: linear-gradient(135deg, #d90000, #ff1a1a); }
 .btn-home { background: rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.2); }
 
 /* ============================================
-   RESPONSIVE
+   RESPONSIVE — Mobile First
+   Breakpoints:
+   - mobile (default): 0 - 640px
+   - tablet:           641px - 1024px
+   - desktop:          1025px+
    ============================================ */
+
+/* ---- Küçük mobil (<= 500px) ---- */
 @media (max-width: 500px) {
     .logo-area h1 { font-size: 1.6em; }
     .shield-icon { font-size: 60px; }
@@ -1024,9 +1030,246 @@ body {
     .cert-name { font-size: 1.5em; }
 }
 
+/* ---- Kısa ekran (yatay mobil) ---- */
 @media (max-height: 600px) {
     .logo-area { margin-bottom: 15px; }
     .shield-icon { font-size: 50px; }
     .logo-area h1 { font-size: 1.4em; }
     .age-btn { padding: 12px 15px; }
+}
+
+/* ============================================
+   TABLET (641px - 1024px)
+   ============================================ */
+@media (min-width: 641px) and (max-width: 1024px) {
+    /* Ana menü */
+    .menu-container { max-width: 760px; padding: 40px 30px; }
+    .shield-icon { font-size: 110px; }
+    .logo-area h1 { font-size: 3em; }
+    .subtitle { font-size: 1.2em; }
+    .age-selection h2 { font-size: 1.8em; margin-bottom: 30px; }
+    .age-buttons { gap: 22px; }
+    .age-btn { min-width: 180px; padding: 28px 32px; border-radius: 24px; }
+    .age-emoji { font-size: 3.2em; }
+    .age-label { font-size: 1.5em; }
+    .age-desc { font-size: 1em; }
+
+    /* Oyun seçimi */
+    .picker-container { max-width: 720px; padding: 40px 30px; }
+    .picker-container h2 { font-size: 2em; margin-bottom: 35px; }
+    .game-cards { gap: 28px; }
+    .game-card { min-width: 220px; padding: 38px 30px; border-radius: 28px; }
+    .game-card-icon { font-size: 4.5em; }
+    .game-card-title { font-size: 1.5em; }
+    .game-card-desc { font-size: 1em; }
+
+    /* Avatar */
+    .avatar-container { max-width: 640px; padding: 40px 30px; }
+    .avatar-container h2 { font-size: 2.2em; }
+    .camera-area { width: 260px; height: 260px; }
+    .btn-camera, .btn-upload { padding: 14px 32px; font-size: 1.15em; }
+    .default-avatar-btn { width: 72px; height: 72px; font-size: 2.4em; }
+
+    /* Ebeveyn setup */
+    .setup-container { max-width: 640px; padding: 40px 30px; }
+    .setup-header h2 { font-size: 2em; }
+    .setup-header p { font-size: 1.1em; }
+    .password-box { font-size: 3.6em; letter-spacing: 18px; padding: 22px 40px; }
+    .info-card { min-width: 240px; max-width: 260px; padding: 20px; }
+    .info-card p { font-size: 0.95em; }
+    .btn-start { padding: 18px 60px; font-size: 1.4em; }
+
+    /* HUD */
+    #game-hud { padding: 14px 28px; font-size: 1.3em; }
+
+    /* Mobil kontroller — tablet için büyüt */
+    #mobile-controls { padding: 22px 40px; }
+    .ctrl-btn { width: 95px; height: 95px; font-size: 2em; border-width: 4px; }
+    .ctrl-left { margin-right: 16px; }
+
+    /* Popup */
+    .popup-container { max-width: 500px; padding: 45px; }
+    .popup-icon { font-size: 5em; }
+    .popup-container h2 { font-size: 1.9em; }
+    .popup-container p { font-size: 1.2em; }
+    .btn-accept, .btn-reject { padding: 16px 38px; font-size: 1.2em; min-width: 180px; }
+
+    /* Şifre giriş */
+    .password-container { max-width: 480px; padding: 45px; }
+    .pin-input input { width: 68px; height: 82px; font-size: 2.2em; border-radius: 14px; }
+
+    /* Feedback */
+    .feedback-icon { font-size: 6em; }
+    .feedback-container h2 { font-size: 2.4em; }
+    .feedback-container p { font-size: 1.35em; max-width: 500px; }
+    .btn-continue { padding: 16px 55px; font-size: 1.35em; }
+
+    /* Final */
+    .final-wrapper { max-width: 780px; padding: 0 24px 30px; }
+    .tab-btn { padding: 12px 26px; font-size: 1.05em; }
+    .cert-border { padding: 40px 32px; }
+    .cert-avatar { width: 120px; height: 120px; }
+    .cert-badge { font-size: 4em; }
+    .cert-header h1 { font-size: 2.1em; }
+    .cert-header h2 { font-size: 1.3em; }
+    .cert-name { font-size: 2.2em; }
+    .stat-cards { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .stat-number { font-size: 2.1em; }
+    .stat-text { font-size: 0.9em; }
+    .btn-retry, .btn-home { padding: 14px 32px; font-size: 1.1em; }
+}
+
+/* ============================================
+   DESKTOP (1025px+)
+   ============================================ */
+@media (min-width: 1025px) {
+    /* Ana menü */
+    .menu-container { max-width: 900px; padding: 50px 40px; }
+    .shield-icon { font-size: 130px; }
+    .logo-area h1 { font-size: 3.6em; letter-spacing: -0.01em; }
+    .subtitle { font-size: 1.25em; }
+    .age-selection h2 { font-size: 2em; margin-bottom: 35px; }
+    .age-buttons { gap: 28px; }
+    .age-btn { min-width: 200px; padding: 32px 36px; border-radius: 24px; }
+    .age-emoji { font-size: 3.5em; }
+    .age-label { font-size: 1.6em; }
+    .age-desc { font-size: 1em; }
+    .footer-info { font-size: 1em; margin-top: 45px; }
+
+    /* Oyun seçimi */
+    .picker-container { max-width: 900px; padding: 50px 40px; }
+    .picker-container h2 { font-size: 2.2em; margin-bottom: 40px; }
+    .game-cards { gap: 32px; }
+    .game-card { min-width: 240px; padding: 45px 34px; border-radius: 28px; }
+    .game-card-icon { font-size: 5em; }
+    .game-card-title { font-size: 1.6em; }
+    .game-card-desc { font-size: 1.05em; }
+
+    /* Avatar */
+    .avatar-container { max-width: 760px; padding: 50px 40px; }
+    .avatar-container h2 { font-size: 2.4em; }
+    .avatar-subtitle { font-size: 1.15em; }
+    .camera-area { width: 280px; height: 280px; border-width: 5px; }
+    .btn-camera, .btn-upload { padding: 14px 34px; font-size: 1.15em; }
+    .default-avatar-btn { width: 76px; height: 76px; font-size: 2.5em; }
+
+    /* Ebeveyn setup */
+    .setup-container { max-width: 720px; padding: 50px 40px; }
+    .setup-header h2 { font-size: 2.2em; }
+    .setup-header p { font-size: 1.15em; }
+    .password-box { font-size: 4em; letter-spacing: 20px; padding: 26px 44px; }
+    .setup-info { gap: 20px; }
+    .info-card { min-width: 260px; max-width: 280px; padding: 22px; }
+    .info-card p { font-size: 1em; }
+    .btn-start { padding: 20px 70px; font-size: 1.45em; }
+
+    /* HUD */
+    #game-hud { padding: 16px 36px; font-size: 1.4em; }
+
+    /* Mobil kontroller — Desktop'ta dokunmatik yoksa gizle, varsa daha kompakt */
+    #mobile-controls { padding: 24px 48px; }
+    .ctrl-btn { width: 88px; height: 88px; font-size: 1.9em; border-width: 4px; }
+    .ctrl-left { margin-right: 18px; }
+
+    /* Popup */
+    .popup-container { max-width: 540px; padding: 50px; }
+    .popup-icon { font-size: 5.5em; }
+    .popup-container h2 { font-size: 2em; }
+    .popup-container p { font-size: 1.25em; }
+    .btn-accept, .btn-reject { padding: 16px 42px; font-size: 1.2em; min-width: 190px; }
+
+    /* Şifre giriş */
+    .password-container { max-width: 520px; padding: 50px; }
+    .pin-input input { width: 74px; height: 88px; font-size: 2.4em; border-radius: 14px; }
+
+    /* Feedback */
+    .feedback-icon { font-size: 6.5em; }
+    .feedback-container h2 { font-size: 2.6em; }
+    .feedback-container p { font-size: 1.4em; max-width: 560px; }
+    .btn-continue { padding: 18px 60px; font-size: 1.4em; }
+
+    /* Final */
+    .final-wrapper { max-width: 900px; padding: 0 32px 40px; }
+    .tab-btn { padding: 14px 30px; font-size: 1.1em; }
+    .cert-border { padding: 50px 40px; }
+    .cert-avatar { width: 130px; height: 130px; }
+    .cert-badge { font-size: 4.5em; }
+    .cert-header h1 { font-size: 2.4em; }
+    .cert-header h2 { font-size: 1.4em; }
+    .cert-name { font-size: 2.4em; }
+    .brochure-header h2 { font-size: 1.9em; }
+    .stat-cards { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .stat-card { padding: 18px 16px; }
+    .stat-number { font-size: 2.2em; }
+    .stat-text { font-size: 0.95em; }
+    .brochure-tips { padding: 24px; }
+    .brochure-tips h3 { font-size: 1.3em; }
+    .tip-item { font-size: 0.98em; }
+    .btn-retry, .btn-home { padding: 14px 36px; font-size: 1.15em; }
+}
+
+/* ============================================
+   Geniş desktop (1400px+) — daha da ferah
+   ============================================ */
+@media (min-width: 1400px) {
+    .menu-container { max-width: 1000px; }
+    .logo-area h1 { font-size: 4em; }
+    .picker-container { max-width: 1000px; }
+    .final-wrapper { max-width: 980px; }
+}
+
+/* ============================================
+   Hover — sadece gerçek hover-capable cihazlarda
+   (dokunmatik ekranlarda sticky hover önler)
+   ============================================ */
+@media (hover: none) {
+    .age-btn:hover,
+    .game-card:hover,
+    .btn-camera:hover,
+    .btn-upload:hover,
+    .btn-start:hover,
+    .btn-accept:hover,
+    .btn-reject:hover,
+    .btn-continue:hover,
+    .btn-download:hover,
+    .default-avatar-btn:hover {
+        transform: none;
+    }
+}
+
+/* ============================================
+   Yatay yönlendirme (landscape) — kısa ekran
+   ============================================ */
+@media (max-height: 500px) and (orientation: landscape) {
+    .screen { overflow-y: auto; }
+    #main-menu, #game-picker, #avatar-screen, #parent-setup, #final-screen {
+        align-items: flex-start;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .logo-area { margin-bottom: 10px; }
+    .shield-icon { font-size: 40px; animation: none; }
+    .logo-area h1 { font-size: 1.3em; }
+    .subtitle { font-size: 0.85em; }
+    .age-selection h2 { font-size: 1.1em; margin-bottom: 10px; }
+    .age-btn { padding: 10px 14px; min-width: 90px; }
+    .age-emoji { font-size: 1.6em; }
+    .age-label { font-size: 0.95em; }
+    .age-desc { font-size: 0.75em; }
+    #mobile-controls { padding: 8px 20px; }
+    .ctrl-btn { width: 55px; height: 55px; font-size: 1.2em; }
+}
+
+/* ============================================
+   Safe-area (iPhone notch vs.) desteği
+   ============================================ */
+@supports (padding: max(0px)) {
+    #mobile-controls {
+        padding-left: max(15px, env(safe-area-inset-left));
+        padding-right: max(15px, env(safe-area-inset-right));
+        padding-bottom: max(15px, env(safe-area-inset-bottom));
+    }
+    #game-hud {
+        padding-top: max(10px, env(safe-area-inset-top));
+    }
 }
