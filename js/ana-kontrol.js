@@ -402,6 +402,11 @@ function showFinalScreen() {
 
 // === FİNAL SEKME & SERTİFİKA ===
 
+// CSS değişkeninden renk oku — renk değişikliği için tek yer: style.css :root
+function getColor(varName) {
+    return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+}
+
 function switchFinalTab(tabName) {
     document.querySelectorAll('.tab-btn').forEach((btn, i) => {
         btn.classList.toggle('active', ['cert', 'parent', 'guide'][i] === tabName);
@@ -411,77 +416,194 @@ function switchFinalTab(tabName) {
 }
 
 function downloadCertificate() {
+    const W = 800, H = 600;
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
-    canvas.width = 800;
-    canvas.height = 600;
+    canvas.width = W;
+    canvas.height = H;
 
-    const bg = ctx.createLinearGradient(0, 0, 800, 600);
-    bg.addColorStop(0, '#0a0a2e');
-    bg.addColorStop(1, '#1a1a4e');
+    // CSS'ten renkler
+    const bgBlack    = getColor('--bg-black')    || '#060609';
+    const bgDark     = getColor('--bg-dark')     || '#0c0c12';
+    const bgMid      = getColor('--bg-mid')      || '#13131c';
+    const primary    = getColor('--primary')     || '#d90000';
+    const primaryLt  = getColor('--primary-light') || '#ff1a1a';
+    const accent     = getColor('--accent')      || '#feedba';
+    const text       = getColor('--text')        || '#ede9e0';
+    const textMuted  = getColor('--text-muted')  || '#7a7870';
+
+    // Arka plan — radyal gradient
+    const bg = ctx.createRadialGradient(W / 2, H / 2, 100, W / 2, H / 2, 550);
+    bg.addColorStop(0, bgMid);
+    bg.addColorStop(0.5, bgDark);
+    bg.addColorStop(1, bgBlack);
     ctx.fillStyle = bg;
-    ctx.fillRect(0, 0, 800, 600);
+    ctx.fillRect(0, 0, W, H);
 
-    ctx.strokeStyle = '#fbbf24'; ctx.lineWidth = 6;
-    ctx.strokeRect(20, 20, 760, 560);
-    ctx.strokeStyle = '#8b5cf6'; ctx.lineWidth = 2;
-    ctx.strokeRect(30, 30, 740, 540);
+    // Çerçeve — ana kırmızı
+    ctx.strokeStyle = primary;
+    ctx.lineWidth = 8;
+    ctx.strokeRect(20, 20, W - 40, H - 40);
+    ctx.strokeStyle = primaryLt;
+    ctx.lineWidth = 1;
+    ctx.strokeRect(35, 35, W - 70, H - 70);
+
+    // Köşe süsler
+    const corner = (x, y, sx, sy) => {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.scale(sx, sy);
+        ctx.strokeStyle = accent;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(0, 25);
+        ctx.lineTo(0, 0);
+        ctx.lineTo(25, 0);
+        ctx.stroke();
+        ctx.fillStyle = accent;
+        ctx.beginPath();
+        ctx.arc(0, 0, 3, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+    };
+    corner(50, 50, 1, 1);
+    corner(W - 50, 50, -1, 1);
+    corner(50, H - 50, 1, -1);
+    corner(W - 50, H - 50, -1, -1);
+
+    // Avatar
+    const avX = W / 2, avY = 125, avR = 58;
+    const halo = ctx.createRadialGradient(avX, avY, avR, avX, avY, avR + 30);
+    halo.addColorStop(0, 'rgba(217, 0, 0, 0.35)');
+    halo.addColorStop(1, 'rgba(217, 0, 0, 0)');
+    ctx.fillStyle = halo;
+    ctx.beginPath();
+    ctx.arc(avX, avY, avR + 30, 0, Math.PI * 2);
+    ctx.fill();
 
     if (playerAvatarImage) {
         ctx.save();
-        ctx.beginPath(); ctx.arc(400, 110, 50, 0, Math.PI * 2); ctx.clip();
-        ctx.drawImage(playerAvatarImage, 350, 60, 100, 100);
+        ctx.beginPath();
+        ctx.arc(avX, avY, avR, 0, Math.PI * 2);
+        ctx.clip();
+        ctx.drawImage(playerAvatarImage, avX - avR, avY - avR, avR * 2, avR * 2);
         ctx.restore();
-        ctx.strokeStyle = '#fbbf24'; ctx.lineWidth = 3;
-        ctx.beginPath(); ctx.arc(400, 110, 50, 0, Math.PI * 2); ctx.stroke();
     } else {
-        ctx.font = '50px serif'; ctx.textAlign = 'center';
-        ctx.fillText('🛡️', 400, 125);
+        ctx.fillStyle = primary;
+        ctx.beginPath();
+        ctx.arc(avX, avY, avR, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.font = '62px serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('🛡️', avX, avY);
     }
+    ctx.strokeStyle = accent;
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.arc(avX, avY, avR, 0, Math.PI * 2);
+    ctx.stroke();
 
+    // Başlık
     ctx.textAlign = 'center';
-    ctx.fillStyle = '#fbbf24'; ctx.font = 'bold 32px system-ui, sans-serif';
-    ctx.fillText('Dijital Savunma Uzmanı', 400, 200);
-    ctx.fillStyle = '#a0a0d0'; ctx.font = '18px system-ui, sans-serif';
-    ctx.fillText('Sertifikası', 400, 225);
+    ctx.textBaseline = 'alphabetic';
+    ctx.fillStyle = accent;
+    ctx.font = 'bold 38px system-ui, -apple-system, sans-serif';
+    ctx.shadowColor = 'rgba(217, 0, 0, 0.5)';
+    ctx.shadowBlur = 12;
+    ctx.fillText('Dijital Savunma Uzmanı', W / 2, 230);
+    ctx.shadowBlur = 0;
 
-    ctx.fillStyle = '#fff'; ctx.font = '14px system-ui, sans-serif';
-    ctx.fillText('Bu sertifika', 400, 270);
+    ctx.fillStyle = textMuted;
+    ctx.font = '20px system-ui, sans-serif';
+    ctx.fillText('Sertifikası', W / 2, 258);
 
+    // Alt çizgi
+    const underline = ctx.createLinearGradient(W / 2 - 150, 0, W / 2 + 150, 0);
+    underline.addColorStop(0, 'rgba(217, 0, 0, 0)');
+    underline.addColorStop(0.5, primary);
+    underline.addColorStop(1, 'rgba(217, 0, 0, 0)');
+    ctx.fillStyle = underline;
+    ctx.fillRect(W / 2 - 150, 270, 300, 2);
+
+    // "Bu sertifika"
+    ctx.fillStyle = text;
+    ctx.font = '16px system-ui, sans-serif';
+    ctx.fillText('Bu sertifika', W / 2, 303);
+
+    // İsim
     const name = document.getElementById('cert-player-name').textContent;
-    ctx.fillStyle = '#64c8ff'; ctx.font = 'bold 28px system-ui, sans-serif';
-    ctx.fillText(name, 400, 310);
+    ctx.fillStyle = primaryLt;
+    ctx.font = 'bold 36px system-ui, sans-serif';
+    ctx.shadowColor = 'rgba(255, 26, 26, 0.4)';
+    ctx.shadowBlur = 10;
+    ctx.fillText(name, W / 2, 348);
+    ctx.shadowBlur = 0;
 
-    ctx.strokeStyle = 'rgba(255,255,255,0.2)'; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(200, 325); ctx.lineTo(600, 325); ctx.stroke();
+    ctx.strokeStyle = 'rgba(237, 233, 224, 0.2)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(W / 2 - 180, 360);
+    ctx.lineTo(W / 2 + 180, 360);
+    ctx.stroke();
 
-    ctx.fillStyle = '#c0c0e0'; ctx.font = '14px system-ui, sans-serif';
-    ctx.fillText('adlı kahramana, dijital dünyada haklarını koruma', 400, 350);
-    ctx.fillText('becerisini başarıyla gösterdiği için verilmiştir.', 400, 370);
+    // Açıklama
+    ctx.fillStyle = text;
+    ctx.font = '15px system-ui, sans-serif';
+    ctx.fillText('adlı kahramana, dijital dünyada haklarını koruma', W / 2, 388);
+    ctx.fillText('becerisini başarıyla gösterdiği için verilmiştir.', W / 2, 410);
 
+    // İstatistik kartları — hepsi aynı tema renginde
     const results = PermissionSystem.getResults();
     const gameScore = getActiveGame().score || 0;
     const stats = [
-        ['⭐ ' + (gameScore + results.score), 'Puan'],
-        ['🛡️ ' + results.rejected, 'Reddedilen'],
-        ['👨‍👩‍👧 ' + results.withParent, 'Ebeveyn Onayı'],
+        { label: 'Toplam Puan',     value: '⭐ ' + (gameScore + results.score) },
+        { label: 'Reddedilen İzin', value: '🛡️ ' + results.rejected },
+        { label: 'Ebeveyn Onayı',   value: '👨‍👩‍👧 ' + results.withParent },
     ];
+
+    const cardW = 170, cardH = 75, cardGap = 20;
+    const totalW = cardW * 3 + cardGap * 2;
+    const startX = (W - totalW) / 2;
+    const cardY = 445;
+
     stats.forEach((s, i) => {
-        const sx = 200 + i * 200;
-        ctx.fillStyle = 'rgba(255,255,255,0.06)';
-        ctx.beginPath(); ctx.roundRect(sx - 60, 400, 120, 60, 10); ctx.fill();
-        ctx.fillStyle = '#10b981'; ctx.font = 'bold 20px system-ui, sans-serif';
-        ctx.fillText(s[0], sx, 425);
-        ctx.fillStyle = '#a0a0d0'; ctx.font = '11px system-ui, sans-serif';
-        ctx.fillText(s[1], sx, 448);
+        const cx = startX + i * (cardW + cardGap);
+
+        ctx.fillStyle = 'rgba(237, 233, 224, 0.05)';
+        ctx.beginPath();
+        ctx.roundRect(cx, cardY, cardW, cardH, 12);
+        ctx.fill();
+
+        ctx.strokeStyle = primary;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.roundRect(cx, cardY, cardW, cardH, 12);
+        ctx.stroke();
+
+        ctx.fillStyle = accent;
+        ctx.font = 'bold 22px system-ui, sans-serif';
+        ctx.fillText(s.value, cx + cardW / 2, cardY + 35);
+
+        ctx.fillStyle = textMuted;
+        ctx.font = '12px system-ui, sans-serif';
+        ctx.fillText(s.label, cx + cardW / 2, cardY + 58);
     });
 
-    ctx.fillStyle = '#808090'; ctx.font = '13px system-ui, sans-serif';
-    ctx.fillText(document.getElementById('cert-date').textContent, 400, 500);
-    ctx.fillStyle = '#a0a0d0'; ctx.font = 'bold 14px system-ui, sans-serif';
-    ctx.fillText('İYTE - 23 Nisan Çocuk Şenliği', 400, 525);
-    ctx.fillStyle = '#606080'; ctx.font = '11px system-ui, sans-serif';
-    ctx.fillText('dijitalsavunma.org', 400, 548);
+    // Tarih
+    ctx.fillStyle = textMuted;
+    ctx.font = '14px system-ui, sans-serif';
+    ctx.fillText(document.getElementById('cert-date').textContent, W / 2, 548);
+
+    // Organizasyon
+    ctx.fillStyle = text;
+    ctx.font = 'bold 15px system-ui, sans-serif';
+    ctx.fillText('İYTE - 23 Nisan Çocuk Şenliği', W / 2, 570);
+
+    // Site
+    ctx.fillStyle = textMuted;
+    ctx.font = '12px system-ui, sans-serif';
+    ctx.fillText('dijitalsavunma.org', W / 2, 588);
 
     const link = document.createElement('a');
     link.download = 'dijital-savunma-sertifikasi.png';
@@ -489,42 +611,44 @@ function downloadCertificate() {
     link.click();
 }
 
-// QR kod (placeholder — gerçek QR ile değiştirilecek)
+// QR kod — dijitalsavunma.org/rehber sayfasına yönlendirir
 function drawQRPlaceholder() {
     const canvas = document.getElementById('qr-canvas');
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const size = 200, cellSize = 8;
-    const modules = Math.floor(size / cellSize);
+    const url = 'https://dijitalsavunma.org/rehber';
 
-    ctx.fillStyle = '#fff';
-    ctx.fillRect(0, 0, size, size);
-
-    const drawFinder = (x, y) => {
-        ctx.fillStyle = '#1e293b';
-        ctx.fillRect(x, y, cellSize * 7, cellSize * 7);
-        ctx.fillStyle = '#fff';
-        ctx.fillRect(x + cellSize, y + cellSize, cellSize * 5, cellSize * 5);
-        ctx.fillStyle = '#1e293b';
-        ctx.fillRect(x + cellSize * 2, y + cellSize * 2, cellSize * 3, cellSize * 3);
-    };
-    drawFinder(cellSize, cellSize);
-    drawFinder(size - cellSize * 8, cellSize);
-    drawFinder(cellSize, size - cellSize * 8);
-
-    ctx.fillStyle = '#1e293b';
-    for (let row = 0; row < modules; row++) {
-        for (let col = 0; col < modules; col++) {
-            if ((row < 9 && col < 9) || (row < 9 && col > modules - 9) || (row > modules - 9 && col < 9)) continue;
-            const hash = ((row * 31 + col * 37 + 42) * 2654435761) >>> 0;
-            if (hash % 3 === 0) ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
-        }
+    // QR kodu okutulabilirliği için standart siyah/beyaz kalır
+    // (renkli QR mobillerde okunmayabilir — sadece ortadaki logo temadan gelir)
+    if (typeof QRCode !== 'undefined' && QRCode.toCanvas) {
+        QRCode.toCanvas(canvas, url, {
+            width: 200,
+            margin: 2,
+            color: { dark: '#0a0a0a', light: '#ffffff' },
+            errorCorrectionLevel: 'H',
+        }, (err) => {
+            if (!err) drawQRLogo(canvas);
+        });
     }
+}
 
+// QR kodun ortasına logo — tema renginde
+function drawQRLogo(canvas) {
+    const ctx = canvas.getContext('2d');
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+    const r = canvas.width * 0.11;
+    const primary = getColor('--primary') || '#d90000';
     ctx.fillStyle = '#fff';
-    ctx.beginPath(); ctx.arc(size / 2, size / 2, 22, 0, Math.PI * 2); ctx.fill();
-    ctx.font = '24px serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillText('🛡️', size / 2, size / 2);
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = primary;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    ctx.font = `${r * 1.1}px serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('🛡️', cx, cy + 1);
 }
 
 // Shake animasyonu

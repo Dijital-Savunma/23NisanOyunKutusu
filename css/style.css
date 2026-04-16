@@ -1,6 +1,20 @@
-/* ============================================
-   DIJITAL SAVUNMA KAHRAMANI - ANA STILLER
-   ============================================ */
+/* Dijital Savunma Kahramanı — Ana Stiller */
+
+/* Renk paleti — tüm renkleri tek yerden değiştirmek için */
+:root {
+    --bg-black: #060609;
+    --bg-dark: #0c0c12;
+    --bg-mid: #13131c;
+    --bg-light: #3d3c3a;
+    --primary: #d90000;
+    --primary-light: #ff1a1a;
+    --primary-dark: #b00000;
+    --accent: #feedba;
+    --text: #ede9e0;
+    --text-muted: #7a7870;
+    --success: #10b981;
+    --white: #ffffff;
+}
 
 * {
     margin: 0;
