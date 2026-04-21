@@ -140,6 +140,31 @@ body {
 }
 
 /* ============================================
+   GERİ BUTONU
+   ============================================ */
+.btn-back {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 10;
+    background: rgba(255,255,255,0.08);
+    border: 2px solid rgba(255,255,255,0.15);
+    border-radius: 50px;
+    padding: 8px 18px;
+    font-size: 0.95em;
+    font-weight: 700;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-back:hover, .btn-back:active {
+    background: rgba(217, 0, 0, 0.15);
+    border-color: var(--primary);
+    color: var(--primary-light);
+}
+
+/* ============================================
    OYUN SEÇİM EKRANI (4-5 YAŞ)
    ============================================ */
 #game-picker {
@@ -1050,6 +1075,7 @@ body {
     .shield-icon { font-size: 50px; }
     .logo-area h1 { font-size: 1.4em; }
     .age-btn { padding: 12px 15px; }
+    .btn-back { top: 10px; left: 10px; padding: 6px 14px; font-size: 0.85em; }
 }
 
 /* ============================================
@@ -1067,6 +1093,9 @@ body {
     .age-emoji { font-size: 3.2em; }
     .age-label { font-size: 1.5em; }
     .age-desc { font-size: 1em; }
+
+    /* Geri butonu */
+    .btn-back { top: 20px; left: 20px; padding: 10px 22px; font-size: 1.05em; }
 
     /* Oyun seçimi */
     .picker-container { max-width: 720px; padding: 40px 30px; }
@@ -1149,6 +1178,9 @@ body {
     .age-label { font-size: 1.6em; }
     .age-desc { font-size: 1em; }
     .footer-info { font-size: 1em; margin-top: 45px; }
+
+    /* Geri butonu */
+    .btn-back { top: 24px; left: 24px; padding: 12px 26px; font-size: 1.1em; }
 
     /* Oyun seçimi */
     .picker-container { max-width: 900px; padding: 50px 40px; }
@@ -1270,6 +1302,7 @@ body {
     .age-emoji { font-size: 1.6em; }
     .age-label { font-size: 0.95em; }
     .age-desc { font-size: 0.75em; }
+    .btn-back { top: 8px; left: 8px; padding: 5px 12px; font-size: 0.8em; }
     #mobile-controls { padding: 8px 20px; }
     .ctrl-btn { width: 55px; height: 55px; font-size: 1.2em; }
 }
@@ -1278,6 +1311,10 @@ body {
    Safe-area (iPhone notch vs.) desteği
    ============================================ */
 @supports (padding: max(0px)) {
+    .btn-back {
+        top: max(16px, env(safe-area-inset-top));
+        left: max(16px, env(safe-area-inset-left));
+    }
     #mobile-controls {
         padding-left: max(15px, env(safe-area-inset-left));
         padding-right: max(15px, env(safe-area-inset-right));

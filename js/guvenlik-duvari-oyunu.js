@@ -55,8 +55,8 @@ const GuvenlikDuvari = {
     dataStreams: [],
     gridOffset: 0,
 
-    // Izin tetikleyicileri -- her 300 puanda
-    triggerScores: [300, 600, 900],
+    // Izin tetikleyicileri -- her 125 puanda
+    triggerScores: [125, 250, 375],
     triggerTypes: ['camera', 'microphone', 'location'],
     triggeredSet: new Set(),
 
@@ -285,8 +285,8 @@ const GuvenlikDuvari = {
             }
         }
 
-        // 1200 puanda oyun biter
-        if (this.score >= 1200) {
+        // 500 puanda oyun biter
+        if (this.score >= 500) {
             this.pause();
             if (typeof onLevelComplete === 'function') {
                 onLevelComplete();

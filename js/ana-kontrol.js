@@ -76,6 +76,16 @@ function pickGame(gameType) {
     showScreen('avatar-screen');
 }
 
+function goBackFromAvatar() {
+    stopCamera();
+    const games = oyunListesi[currentAgeGroup];
+    if (games && games.length > 1) {
+        showScreen('game-picker');
+    } else {
+        showScreen('main-menu');
+    }
+}
+
 // === KAMERA & AVATAR ===
 
 function resetAvatarScreen() {
