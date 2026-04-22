@@ -1,26 +1,11 @@
 /* Ana Kontrol — Ekran geçişleri, oyun akışı, avatar, sertifika */
 
-// Text-to-Speech — neseli, cocuk dostu kadin sesi
-function speak(text) {
-    if (!('speechSynthesis' in window)) return;
-    speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = 'tr-TR';
-    u.rate = 0.9;
-    u.pitch = 1.4;
-    u.volume = 1;
-    // Turkce kadin sesi tercih et
-    const voices = speechSynthesis.getVoices();
-    const trFemale = voices.find(v => v.lang.startsWith('tr') && /female|kadın|yelda/i.test(v.name));
-    const trAny = voices.find(v => v.lang.startsWith('tr'));
-    if (trFemale) u.voice = trFemale;
-    else if (trAny) u.voice = trAny;
-    speechSynthesis.speak(u);
-}
-// Sesleri onceden yukle
-if ('speechSynthesis' in window) {
-    speechSynthesis.getVoices();
-    speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices();
+// Ses dosyalari
+let currentAudio = null;
+function playSound(file) {
+    if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+    currentAudio = new Audio('assets/sounds/' + file);
+    currentAudio.play().catch(() => {});
 }
 
 let currentAgeGroup = null;
@@ -86,12 +71,12 @@ function startGame(ageGroup) {
             </button>
         `).join('');
         showScreen('game-picker');
-        speak('Harika! Şimdi hangi oyunu oynamak istersin?');
+        playSound('oyun-sec.mp3');
     } else {
         selectedMiniGame = games[0].id;
         resetAvatarScreen();
         showScreen('avatar-screen');
-        speak('Hadi kahramanımızı oluşturalım! Bir fotoğraf çekebilir ya da birini seçebilirsin!');
+        playSound('kahraman.mp3');
     }
 }
 
@@ -282,7 +267,7 @@ function goToParentSetup() {
     const pw = PermissionSystem.generatePassword();
     document.getElementById('parent-password').textContent = pw;
     showScreen('parent-setup');
-    speak('Anne ya da babanla birlikte bu şifreyi not alalım!');
+    playSound('ebeveyn.mp3');
 }
 
 function generatePassword() {
@@ -355,7 +340,7 @@ function loadCurrentLevel() {
 
 function onPermissionTrigger(trigger) {
     PermissionSystem.showPermissionPopup(trigger, currentAgeGroup);
-    speak('Ooo! Birisi senden bir şey istiyor. Ne yapmak istersin?');
+    playSound('izin.mp3');
 }
 
 function handlePermission(accepted) {
@@ -449,7 +434,7 @@ function showFinalScreen() {
     drawQRPlaceholder();
     submitResults(gameScore, results, playTime);
     setTimeout(() => PermissionSystem.launchConfetti(), 300);
-    setTimeout(() => speak('Yaşasın! Süper oynadın! Sen artık bir dijital savunma kahramanısın!'), 500);
+    setTimeout(() => playSound('final.mp3'), 500);
 }
 
 // Sonuclari sunucuya gonder
