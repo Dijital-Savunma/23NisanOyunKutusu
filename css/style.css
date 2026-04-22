@@ -47,6 +47,16 @@ body {
     display: flex;
 }
 
+/* Form ekranları scroll edilebilir */
+#main-menu,
+#game-picker,
+#avatar-screen,
+#parent-setup {
+    overflow-y: auto;
+    align-items: flex-start;
+    -webkit-overflow-scrolling: touch;
+}
+
 /* ============================================
    ANA MENÜ
    ============================================ */
@@ -57,8 +67,11 @@ body {
 .menu-container {
     text-align: center;
     padding: 20px;
+    padding-top: 40px;
+    padding-bottom: 40px;
     max-width: 600px;
     width: 100%;
+    margin: auto;
 }
 
 .logo-area {
@@ -174,8 +187,11 @@ body {
 .picker-container {
     text-align: center;
     padding: 20px;
+    padding-top: 60px;
+    padding-bottom: 40px;
     max-width: 500px;
     width: 100%;
+    margin: auto;
 }
 
 .picker-container h2 {
@@ -236,8 +252,11 @@ body {
 .avatar-container {
     text-align: center;
     padding: 20px;
+    padding-top: 60px;
+    padding-bottom: 40px;
     max-width: 500px;
     width: 100%;
+    margin: auto;
 }
 
 .avatar-container h2 {
@@ -432,8 +451,11 @@ body {
 .setup-container {
     text-align: center;
     padding: 25px;
+    padding-top: 40px;
+    padding-bottom: 40px;
     max-width: 500px;
     width: 100%;
+    margin: auto;
 }
 
 .setup-header h2 {
@@ -1287,12 +1309,6 @@ body {
    Yatay yönlendirme (landscape) — kısa ekran
    ============================================ */
 @media (max-height: 500px) and (orientation: landscape) {
-    .screen { overflow-y: auto; }
-    #main-menu, #game-picker, #avatar-screen, #parent-setup, #final-screen {
-        align-items: flex-start;
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
     .logo-area { margin-bottom: 10px; }
     .shield-icon { font-size: 40px; animation: none; }
     .logo-area h1 { font-size: 1.3em; }
@@ -1314,6 +1330,12 @@ body {
     .btn-back {
         top: max(16px, env(safe-area-inset-top));
         left: max(16px, env(safe-area-inset-left));
+    }
+    .menu-container,
+    .picker-container,
+    .avatar-container,
+    .setup-container {
+        padding-top: max(40px, calc(env(safe-area-inset-top) + 20px));
     }
     #mobile-controls {
         padding-left: max(15px, env(safe-area-inset-left));
