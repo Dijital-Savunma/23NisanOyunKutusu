@@ -109,32 +109,30 @@ function resetAvatarScreen() {
 }
 
 async function openCamera() {
-    try {
-        cameraStream = await navigator.mediaDevices.getUserMedia({
-            video: { facingMode: 'user' }
-        });
-        const video = document.getElementById('camera-video');
-        video.setAttribute('playsinline', '');
-        video.setAttribute('autoplay', '');
-        video.muted = true;
-        video.srcObject = cameraStream;
+    // Once getUserMedia dene, basarisiz olursa native kamera input'u ac
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+            cameraStream = stream;
+            const video = document.getElementById('camera-video');
+            video.muted = true;
+            video.setAttribute('playsinline', '');
+            video.srcObject = stream;
+            await video.play();
 
-        // iPad Safari icin: stream hazir olunca play et
-        await new Promise((resolve, reject) => {
-            video.onloadedmetadata = () => {
-                video.play().then(resolve).catch(resolve);
-            };
-            setTimeout(reject, 5000);
-        });
-
-        video.style.display = 'block';
-        document.getElementById('avatar-preview').style.display = 'none';
-        document.getElementById('camera-snapshot').style.display = 'none';
-        document.getElementById('btn-open-camera').style.display = 'none';
-        document.getElementById('btn-capture').style.display = '';
-    } catch (err) {
-        alert('Kameraya erişilemedi. Lütfen galeriden bir fotoğraf seç.');
+            video.style.display = 'block';
+            document.getElementById('avatar-preview').style.display = 'none';
+            document.getElementById('camera-snapshot').style.display = 'none';
+            document.getElementById('btn-open-camera').style.display = 'none';
+            document.getElementById('btn-capture').style.display = '';
+            return;
+        } catch (e) {
+            // getUserMedia basarisiz — native camera'ya dus
+        }
     }
+
+    // Fallback: native kamera input'u tetikle (iPad/iOS icin)
+    document.getElementById('camera-capture').click();
 }
 
 function capturePhoto() {
