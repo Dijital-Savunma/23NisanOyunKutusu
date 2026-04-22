@@ -30,7 +30,7 @@ const ArabaOyunu = {
 
     traffic: [],
     trafficTimer: 0,
-    trafficInterval: 180,
+    trafficInterval: 140,
 
     coins: [],
     coinTimer: 0,
@@ -123,7 +123,7 @@ const ArabaOyunu = {
         this.coins = [];
         this.trafficTimer = 0;
         this.coinTimer = 0;
-        this.trafficInterval = 180;
+        this.trafficInterval = 140;
         this.triggeredSet = new Set();
         this.particles = [];
         this.screenShake = 0;
@@ -171,7 +171,7 @@ const ArabaOyunu = {
         this.distance += speed * dt * 0.1;
 
         this.roadSpeed = Math.min(this.maxRoadSpeed, 3 + this.distance * 0.002);
-        this.trafficInterval = Math.max(80, 180 - this.distance * 0.04);
+        this.trafficInterval = Math.max(60, 140 - this.distance * 0.04);
 
         // Oyuncu pozisyon yumuşatma
         p.x += (p.targetX - p.x) * 0.2 * dt;
