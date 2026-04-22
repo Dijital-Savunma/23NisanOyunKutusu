@@ -111,10 +111,22 @@ function resetAvatarScreen() {
 async function openCamera() {
     try {
         cameraStream = await navigator.mediaDevices.getUserMedia({
-            video: { facingMode: 'environment', width: 400, height: 400 }
+            video: { facingMode: 'user' }
         });
         const video = document.getElementById('camera-video');
+        video.setAttribute('playsinline', '');
+        video.setAttribute('autoplay', '');
+        video.muted = true;
         video.srcObject = cameraStream;
+
+        // iPad Safari icin: stream hazir olunca play et
+        await new Promise((resolve, reject) => {
+            video.onloadedmetadata = () => {
+                video.play().then(resolve).catch(resolve);
+            };
+            setTimeout(reject, 5000);
+        });
+
         video.style.display = 'block';
         document.getElementById('avatar-preview').style.display = 'none';
         document.getElementById('camera-snapshot').style.display = 'none';
@@ -129,9 +141,11 @@ function capturePhoto() {
     const video = document.getElementById('camera-video');
     const canvas = document.getElementById('camera-snapshot');
     const ctx = canvas.getContext('2d');
-    const size = Math.min(video.videoWidth, video.videoHeight);
-    const sx = (video.videoWidth - size) / 2;
-    const sy = (video.videoHeight - size) / 2;
+    const vw = video.videoWidth || video.clientWidth;
+    const vh = video.videoHeight || video.clientHeight;
+    const size = Math.min(vw, vh) || 200;
+    const sx = (vw - size) / 2;
+    const sy = (vh - size) / 2;
 
     canvas.width = 200;
     canvas.height = 200;
