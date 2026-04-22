@@ -8,6 +8,31 @@ function playSound(file) {
     currentAudio.play().catch(() => {});
 }
 
+// Arka plan muzigi — oyun sirasinda calar, popup'larda durur, devam eder
+const bgm = new Audio('assets/sounds/bgm.mp3');
+bgm.loop = true;
+bgm.volume = 0.3;
+let bgmPlaying = false;
+
+function bgmStart() {
+    if (bgmPlaying) return;
+    bgm.play().then(() => { bgmPlaying = true; }).catch(() => {});
+}
+function bgmPause() {
+    if (!bgmPlaying) return;
+    bgm.pause();
+    bgmPlaying = false;
+}
+function bgmResume() {
+    if (bgmPlaying) return;
+    bgm.play().then(() => { bgmPlaying = true; }).catch(() => {});
+}
+function bgmStop() {
+    bgm.pause();
+    bgm.currentTime = 0;
+    bgmPlaying = false;
+}
+
 let currentAgeGroup = null;
 let currentLevel = 0;
 let gameStartTime = null;
@@ -33,6 +58,7 @@ function getActiveGame() {
 }
 
 function goHome() {
+    bgmStop();
     showScreen('main-menu');
     getActiveGame().pause();
 }
@@ -84,7 +110,7 @@ function pickGame(gameType) {
     selectedMiniGame = gameType;
     resetAvatarScreen();
     showScreen('avatar-screen');
-    speak('Kahramanını oluştur!');
+    playSound('kahraman.mp3');
 }
 
 function goBackFromAvatar() {
@@ -279,6 +305,7 @@ function generatePassword() {
 
 function confirmParentSetup() {
     gameStartTime = Date.now();
+    bgmStart();
     document.getElementById('mobile-controls').style.display = 'none';
     document.getElementById('hud-hearts').parentElement.style.visibility = 'hidden';
 
@@ -339,6 +366,7 @@ function loadCurrentLevel() {
 // === İZİN TUZAKLARI ===
 
 function onPermissionTrigger(trigger) {
+    bgmPause();
     PermissionSystem.showPermissionPopup(trigger, currentAgeGroup);
     playSound('izin.mp3');
 }
@@ -372,6 +400,7 @@ function backToGame() {
 function continuePlaying() {
     showScreen('game-screen');
     getActiveGame().resume();
+    bgmResume();
 }
 
 // === SEVİYE & FİNAL ===
@@ -385,6 +414,7 @@ function onLevelComplete() {
 }
 
 function showFinalScreen() {
+    bgmStop();
     getActiveGame().pause();
     const results = PermissionSystem.getResults();
     const playTime = Math.floor((Date.now() - gameStartTime) / 1000);
