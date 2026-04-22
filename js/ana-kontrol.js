@@ -419,7 +419,27 @@ function showFinalScreen() {
     switchFinalTab('cert');
     showScreen('final-screen');
     drawQRPlaceholder();
+    submitResults(gameScore, results, playTime);
     setTimeout(() => PermissionSystem.launchConfetti(), 300);
+}
+
+// Sonuclari sunucuya gonder
+function submitResults(gameScore, results, playTime) {
+    const avatarData = playerAvatarImage ? playerAvatarImage.src : null;
+    const payload = {
+        gameType: selectedMiniGame || 'platformer',
+        ageGroup: currentAgeGroup,
+        score: gameScore + results.score,
+        rejected: results.rejected,
+        withParent: results.withParent,
+        playTimeSec: playTime,
+        avatarData: avatarData,
+    };
+    fetch('/oyun-api/api/results', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+    }).catch(() => {});
 }
 
 // === FİNAL SEKME & SERTİFİKA ===
