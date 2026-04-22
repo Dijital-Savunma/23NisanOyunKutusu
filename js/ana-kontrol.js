@@ -670,6 +670,18 @@ function drawQRPlaceholder() {
         }, (err) => {
             if (!err) drawQRLogo(canvas);
         });
+    } else {
+        // CDN yuklenemezse fallback: URL'yi canvas'a yaz
+        const ctx = canvas.getContext('2d');
+        canvas.width = 200;
+        canvas.height = 200;
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, 200, 200);
+        ctx.fillStyle = '#0a0a0a';
+        ctx.font = 'bold 16px system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('dijitalsavunma.org', 100, 90);
+        ctx.fillText('/rehber', 100, 115);
     }
 }
 
