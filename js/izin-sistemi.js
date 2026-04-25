@@ -1,6 +1,7 @@
 /* İzin Sistemi & Ebeveyn Şifre Yönetimi */
 
 const PermissionSystem = {
+    validPasswords: ['9191', '4141', '4543', '5651', '9819'],
     parentPassword: '0000',
     currentTrigger: null,
     stats: {
@@ -10,7 +11,7 @@ const PermissionSystem = {
     },
 
     generatePassword() {
-        this.parentPassword = String(Math.floor(1000 + Math.random() * 9000));
+        this.parentPassword = this.validPasswords[Math.floor(Math.random() * this.validPasswords.length)];
         return this.parentPassword;
     },
 
@@ -52,7 +53,7 @@ const PermissionSystem = {
             entered += document.getElementById('pin-' + i).value;
         }
 
-        if (entered === this.parentPassword) {
+        if (this.validPasswords.includes(entered)) {
             this.stats.acceptedWithParent++;
             const permData = Levels[ageGroup].permissions[this.currentTrigger.type];
 
