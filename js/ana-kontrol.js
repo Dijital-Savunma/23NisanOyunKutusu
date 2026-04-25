@@ -1,17 +1,32 @@
 /* Ana Kontrol — Ekran geçişleri, oyun akışı, avatar, sertifika */
 
-// Ses dosyalari
-let currentAudio = null;
-function playSound(file) {
-    if (currentAudio) { currentAudio.pause(); currentAudio = null; }
-    currentAudio = new Audio('assets/sounds/' + file);
-    currentAudio.play().catch(() => {});
+// Ses dosyalari — onceden yukle, tekrar kullan
+const sounds = {
+    'oyun-sec': new Audio('assets/sounds/oyun-sec.mp3'),
+    'kahraman': new Audio('assets/sounds/kahraman.mp3'),
+    'ebeveyn': new Audio('assets/sounds/ebeveyn.mp3'),
+    'izin': new Audio('assets/sounds/izin.mp3'),
+    'final': new Audio('assets/sounds/final.mp3'),
+};
+// Onceden yukle
+Object.values(sounds).forEach(a => { a.preload = 'auto'; a.load(); });
+
+let currentSound = null;
+function playSound(name) {
+    if (currentSound) { currentSound.pause(); currentSound.currentTime = 0; }
+    const s = sounds[name];
+    if (!s) return;
+    s.currentTime = 0;
+    currentSound = s;
+    s.play().catch(() => {});
 }
 
-// Arka plan muzigi — oyun sirasinda calar, popup'larda durur, devam eder
+// Arka plan muzigi
 const bgm = new Audio('assets/sounds/bgm.mp3');
 bgm.loop = true;
 bgm.volume = 0.3;
+bgm.preload = 'auto';
+bgm.load();
 let bgmPlaying = false;
 
 function bgmStart() {
@@ -32,6 +47,19 @@ function bgmStop() {
     bgm.currentTime = 0;
     bgmPlaying = false;
 }
+
+// Ilk kullanici etkilesiminde tum sesleri unlock et (iOS/Safari icin)
+let audioUnlocked = false;
+function unlockAudio() {
+    if (audioUnlocked) return;
+    audioUnlocked = true;
+    Object.values(sounds).forEach(a => { a.play().then(() => { a.pause(); a.currentTime = 0; }).catch(() => {}); });
+    bgm.play().then(() => { bgm.pause(); bgm.currentTime = 0; }).catch(() => {});
+    document.removeEventListener('touchstart', unlockAudio);
+    document.removeEventListener('click', unlockAudio);
+}
+document.addEventListener('touchstart', unlockAudio, { once: true });
+document.addEventListener('click', unlockAudio, { once: true });
 
 let currentAgeGroup = null;
 let currentLevel = 0;
@@ -97,12 +125,12 @@ function startGame(ageGroup) {
             </button>
         `).join('');
         showScreen('game-picker');
-        playSound('oyun-sec.mp3');
+        playSound('oyun-sec');
     } else {
         selectedMiniGame = games[0].id;
         resetAvatarScreen();
         showScreen('avatar-screen');
-        playSound('kahraman.mp3');
+        playSound('kahraman');
     }
 }
 
@@ -110,7 +138,7 @@ function pickGame(gameType) {
     selectedMiniGame = gameType;
     resetAvatarScreen();
     showScreen('avatar-screen');
-    playSound('kahraman.mp3');
+    playSound('kahraman');
 }
 
 function goBackFromAvatar() {
@@ -293,7 +321,7 @@ function goToParentSetup() {
     const pw = PermissionSystem.generatePassword();
     document.getElementById('parent-password').textContent = pw;
     showScreen('parent-setup');
-    playSound('ebeveyn.mp3');
+    playSound('ebeveyn');
 }
 
 function generatePassword() {
@@ -368,7 +396,7 @@ function loadCurrentLevel() {
 function onPermissionTrigger(trigger) {
     bgmPause();
     PermissionSystem.showPermissionPopup(trigger, currentAgeGroup);
-    playSound('izin.mp3');
+    playSound('izin');
 }
 
 function handlePermission(accepted) {
@@ -464,7 +492,7 @@ function showFinalScreen() {
     drawQRPlaceholder();
     submitResults(gameScore, results, playTime);
     setTimeout(() => PermissionSystem.launchConfetti(), 300);
-    setTimeout(() => playSound('final.mp3'), 500);
+    setTimeout(() => playSound('final'), 500);
 }
 
 // Sonuclari sunucuya gonder
