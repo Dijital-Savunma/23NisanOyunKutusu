@@ -84,7 +84,7 @@ const GuvenlikDuvari = {
 
         this.shield.width = Math.min(this.width * 0.25, 160);
         this.shield.height = Math.max(18, this.height * 0.028);
-        this.shield.y = this.height - this.shield.height - 50;
+        this.shield.y = this.height - this.shield.height - 90;
         this.shield.speed = Math.max(5, this.width * 0.012);
 
         if (this.shield.x < 10) this.shield.x = 10;

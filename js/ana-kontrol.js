@@ -151,6 +151,11 @@ function goBackFromAvatar() {
     }
 }
 
+function goBackFromParentSetup() {
+    resetAvatarScreen();
+    showScreen('avatar-screen');
+}
+
 // === KAMERA & AVATAR ===
 
 function resetAvatarScreen() {
