@@ -697,11 +697,11 @@ function downloadCertificate() {
     link.click();
 }
 
-// QR kod — dijitalsavunma.org/rehber sayfasına yönlendirir
+// QR kod — iytecocuk.dijitalsavunma.org sayfasına yönlendirir
 function drawQRPlaceholder() {
     const canvas = document.getElementById('qr-canvas');
     if (!canvas) return;
-    const url = 'https://dijitalsavunma.org/rehber';
+    const url = 'https://iytecocuk.dijitalsavunma.org/';
 
     // QR kodu okutulabilirliği için standart siyah/beyaz kalır
     // (renkli QR mobillerde okunmayabilir — sadece ortadaki logo temadan gelir)
